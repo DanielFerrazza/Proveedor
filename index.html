@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Sofritos y Fondos Caseros</title>
+  <style>
+    :root {
+      --primary-color: #f28b30;
+      --secondary-color: #3a3a3a;
+      --bg-color: #fff;
+      --text-color: #333;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: url('https://source.unsplash.com/1600x900/?kitchen,cooking') center/cover no-repeat;
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header { background: rgba(58,58,58,0.8); color: #fff; padding: 1rem; text-align: center; }
+    header h1 { font-size: 2rem; }
+    nav { display: flex; justify-content: center; gap: 1rem; margin-top: 0.5rem; }
+    nav button { background: var(--primary-color); border: none; padding: 0.5rem 1rem; color: #fff; cursor: pointer; border-radius: 4px; transition: background 0.3s; }
+    nav button.active, nav button:hover { background: #d76e10; }
+    main { flex: 1; padding: 2rem; backdrop-filter: blur(5px); }
+    .catalog, .traditional { display: none; gap: 1.5rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 1rem; }
+    .card { background: var(--card-bg); padding: 1rem; border-radius: 8px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; }
+    .card h3 { margin-bottom: 0.5rem; color: var(--secondary-color); }
+    .card select, .card input[type="number"] { margin-bottom: 0.5rem; padding: 0.3rem; width: 100%; }
+    .card button { background: var(--primary-color); border: none; padding: 0.5rem; color: #fff; cursor: pointer; border-radius: 4px; transition: background 0.3s; }
+    .card button:hover { background: #d76e10; }
+    #cart { position: fixed; right: 1rem; top: 5rem; background: var(--card-bg); padding: 1rem; border-radius: 8px; box-shadow: var(--shadow); max-width: 300px; max-height: 80vh; overflow-y: auto; }
+    #cart h2 { margin-bottom: 0.5rem; }
+    #cart ul { list-style: none; }
+    #cart li { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+    #cart li span { flex: 1; }
+    #checkout { margin-top: 1rem; width: 100%; padding: 0.5rem; background: var(--secondary-color); color: #fff; border: none; cursor: pointer; border-radius: 4px; }
+    .traditional form { display: flex; flex-direction: column; gap: 1rem; background: var(--card-bg); padding: 1rem; border-radius: 8px; box-shadow: var(--shadow); max-width: 500px; margin: auto; }
+    .traditional fieldset { border: 1px solid #ccc; border-radius: 4px; padding: 0.5rem; }
+    .traditional legend { padding: 0 0.5rem; }
+    .traditional label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+    .traditional input[type="number"] { width: 60px; margin-left: 0.5rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Catálogo Casero de Sofritos, Fondos y Bechamel</h1>
+    <nav>
+      <button id="btnInteractive" class="active">Interactivo</button>
+      <button id="btnTraditional">Tradicional</button>
+    </nav>
+  </header>
+  <main>
+    <section id="interactive" class="catalog grid"></section>
+    <section id="traditional" class="traditional">
+      <form id="tradForm">
+        <fieldset>
+          <legend>Fondos Generales</legend>
+          <label>Fondo blanco de ave <input type="number" name="Fondo blanco de ave" min="0" value="0"></label>
+          <label>Fondo oscuro de ternera <input type="number" name="Fondo oscuro de ternera" min="0" value="0"></label>
+          <label>Fondo oscuro de ave <input type="number" name="Fondo oscuro de ave" min="0" value="0"></label>
+          <label>Fondo blanco de ternera <input type="number" name="Fondo blanco de ternera" min="0" value="0"></label>
+          <label>Fondo vegetal claro <input type="number" name="Fondo vegetal claro" min="0" value="0"></label>
+          <label>Fondo vegetal oscuro <input type="number" name="Fondo vegetal oscuro" min="0" value="0"></label>
+          <label>Fumet de pescado blanco <input type="number" name="Fumet de pescado blanco" min="0" value="0"></label>
+          <label>Fumet de marisco <input type="number" name="Fumet de marisco" min="0" value="0"></label>
+        </fieldset>
+        <fieldset>
+          <legend>Fondos Específicos</legend>
+          <label>Arroces de carne <input type="number" name="Fondo para arroces de carne" min="0" value="0"></label>
+          <label>Arroces de pescado <input type="number" name="Fondo para arroces de pescado" min="0" value="0"></label>
+          <label>Fideuás <input type="number" name="Fondo para fideuás" min="0" value="0"></label>
+          <label>Paella negra <input type="number" name="Fondo para paella negra" min="0" value="0"></label>
+          <label>Callos a la madrileña <input type="number" name="Fondo de callos a la madrileña" min="0" value="0"></label>
+          <label>Cocido madrileño <input type="number" name="Fondo para cocido madrileño" min="0" value="0"></label>
+          <label>Fabada asturiana <input type="number" name="Fondo para fabada asturiana" min="0" value="0"></label>
+          <label>Lentejas estofadas <input type="number" name="Fondo para lentejas estofadas" min="0" value="0"></label>
+        </fieldset>
+        <fieldset>
+          <legend>Sofritos</legend>
+          <label>Sofrito casero (ajo, cebolla y tomate) <input type="number" name="Base de sofrito casero" min="0" value="0"></label>
+          <label>Sofrito estilo italiano (apio y zanahoria) <input type="number" name="Base de sofrito estilo italiano" min="0" value="0"></label>
+        </fieldset>
+        <fieldset>
+          <legend>Bechamel</legend>
+          <label>Bechamel clásica <input type="number" name="Base de bechamel clásica" min="0" value="0"></label>
+          <label>Bechamel ligera para gratinar <input type="number" name="Base de bechamel ligera para gratinar" min="0" value="0"></label>
+        </fieldset>
+        <button type="submit">Enviar Pedido</button>
+      </form>
+    </section>
+  </main>
+  <aside id="cart">
+    <h2>Tu Pedido</h2>
+    <ul></ul>
+    <button id="checkout">Generar Mail</button>
+  </aside>
+  <script>
+    // Tamaños y precios aproximados (proveedor mayorista)
+    const sizesFondos = [
+      { label: '1L', price: 7.0 },
+      { label: '5L', price: 32.0 },
+      { label: '10L', price: 60.0 }
+    ];
+    const sizesBechamel = [...sizesFondos];
+    const sizesSofritos = [
+      { label: '1kg', price: 6.0 },
+      { label: '5kg', price: 28.0 },
+      { label: '10kg', price: 50.0 }
+    ];
+
+    const products = [
+      // Fondos Generales
+      'Fondo blanco de ave','Fondo oscuro de ternera','Fondo oscuro de ave','Fondo blanco de ternera',
+      'Fondo vegetal claro','Fondo vegetal oscuro','Fumet de pescado blanco','Fumet de marisco',
+      // Fondos Específicos
+      'Fondo para arroces de carne','Fondo para arroces de pescado','Fondo para fideuás',
+      'Fondo para paella negra','Fondo de callos a la madrileña','Fondo para cocido madrileño',
+      'Fondo para fabada asturiana','Fondo para lentejas estofadas',
+      // Sofritos
+      'Base de sofrito casero','Base de sofrito estilo italiano',
+      // Bechamel
+      'Base de bechamel clásica','Base de bechamel ligera para gratinar'
+    ];
+    let cart = [];
+
+    const interactiveSection = document.getElementById('interactive');
+    const tradSection = document.getElementById('traditional');
+    const btnInteractive = document.getElementById('btnInteractive');
+    const btnTraditional = document.getElementById('btnTraditional');
+
+    btnInteractive.addEventListener('click', () => {
+      btnInteractive.classList.add('active'); btnTraditional.classList.remove('active');
+      interactiveSection.style.display = 'grid'; tradSection.style.display = 'none';
+    });
+    btnTraditional.addEventListener('click', () => {
+      btnTraditional.classList.add('active'); btnInteractive.classList.remove('active');
+      tradSection.style.display = 'block'; interactiveSection.style.display = 'none';
+    });
+
+    function getSizes(name) {
+      if (name.toLowerCase().includes('sofrito')) return sizesSofritos;
+      if (name.toLowerCase().includes('bechamel')) return sizesBechamel;
+      return sizesFondos;
+    }
+
+    function renderCatalog() {
+      interactiveSection.innerHTML = '';
+      products.forEach(name => {
+        const card = document.createElement('div'); card.className = 'card';
+        const title = document.createElement('h3'); title.textContent = name;
+        const selectSize = document.createElement('select');
+        getSizes(name).forEach(s => selectSize.innerHTML += `<option value='${s.price}'>${s.label} - €${s.price.toFixed(2)}</option>`);
+        const qtyInput = document.createElement('input'); qtyInput.type = 'number'; qtyInput.min = 1; qtyInput.value = 1;
+        const btn = document.createElement('button'); btn.textContent = 'Añadir';
+        btn.addEventListener('click', () => addToCart(name, parseFloat(selectSize.value), selectSize.options[selectSize.selectedIndex].text, parseInt(qtyInput.value)));
+        card.append(title, selectSize, qtyInput, btn);
+        interactiveSection.append(card);
+      });
+    }
+
+    function addToCart(name, price, size, qty) {
+      const existing = cart.find(i => i.name === name && i.size === size);
+      if (existing) existing.qty += qty; else cart.push({ name, size, price, qty });
+      renderCart();
+    }
+
+    function renderCart() {
+      const ul = document.querySelector('#cart ul'); ul.innerHTML = '';
+      cart.forEach((item, idx) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${item.name} (${item.size}) x${item.qty}</span><span>€${(item.price*item.qty).toFixed(2)}</span><button data-idx='${idx}'>x</button>`;
+        ul.append(li);
+      });
+      ul.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { cart.splice(b.dataset.idx,1); renderCart(); }));
+    }
+
+    document.getElementById('checkout').addEventListener('click', () => {
+      if (!cart.length) return alert('El carrito está vacío.');
+      let body = 'Pedido:\n';
+      cart.forEach(i => body += `- ${i.name} (${i.size}) x${i.qty}: €${(i.price*i.qty).toFixed(2)}\n`);
+      body += '\nGracias.\n';
+      window.location.href = `mailto:tucorreo@dominio.com?subject=Pedido de productos&body=${encodeURIComponent(body)}`;
+    });
+
+    document.getElementById('tradForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      let body = 'Pedido tradicional:\n';
+      for (let [name, qty] of fd.entries()) if (qty>0) body += `- ${name}: ${qty}\n`;
+      if (body.trim()==='') return alert('Selecciona al menos un producto.');
+      body += '\nGracias.\n';
+      window.location.href = `mailto:tucorreo@dominio.com?subject=Pedido tradicional&body=${encodeURIComponent(body)}`;
+    });
+
+    renderCatalog(); interactiveSection.style.display = 'grid';
+  </script>
+</body>
+</html>
